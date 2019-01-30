@@ -1,4 +1,4 @@
-defmodule Peer do
+defmodule Peer1 do
 
   def start(id) do
     # Map from a process_id to a tuple of 2 elements(msgs broadcast, msgs received)

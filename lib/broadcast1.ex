@@ -5,7 +5,7 @@ defmodule Broadcast1 do
     timeout = 3000
 
     peers = for n <- 0..4 do
-      spawn(Peer, :start, [n])
+      spawn(Peer1, :start, [n])
     end
 
     for peer <- peers do
@@ -19,7 +19,7 @@ defmodule Broadcast1 do
     timeout = 3000
 
     peers = for n <- 0..4 do
-      Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer, :start, [n])
+      Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer1, :start, [n])
     end
 
     for peer <- peers do
