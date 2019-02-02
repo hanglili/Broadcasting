@@ -1,11 +1,11 @@
 defmodule Broadcasting do
 
   def main do
-    Broadcast2.broadcast2()
+    Broadcast4.broadcast()
   end
 
   def main_net do
-    Broadcast2.broadcast2_net()
+    Broadcast4.broadcast_net()
   end
 
 end
