@@ -17,9 +17,7 @@ defmodule LPL4 do
         send Map.get(pl_ids, dest_peer), { :network_deliver, from, message }
       end
     { :network_deliver, from, message } ->
-      # if Enum.random(1..100) > (100 - reliability) do
-        send beb_id, { :pl_deliver, from, message }
-      # end
+      send beb_id, { :pl_deliver, from, message }
     end
     next(beb_id, pl_ids, reliability)
   end
