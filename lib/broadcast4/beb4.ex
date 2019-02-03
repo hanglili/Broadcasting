@@ -3,9 +3,9 @@ defmodule BEB4 do
 
   def start(peers) do
     receive do
-      { :bind, pl, c } ->
-        next(peers, pl, c)
-      end
+    { :bind, pl, c } ->
+      next(peers, pl, c)
+    end
   end
 
   defp next(peers, pl, c) do

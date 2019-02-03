@@ -1,4 +1,4 @@
-defmodule BEB5 do
+defmodule BEB6 do
   # Basic broadcast
 
   def start(peers) do

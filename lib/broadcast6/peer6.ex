@@ -1,4 +1,4 @@
-defmodule Peer5 do
+defmodule Peer6 do
 
   def start(id, broadcast) do
     # Terminate itself
@@ -12,13 +12,15 @@ defmodule Peer5 do
   end
 
   defp init_comps(id, broadcast, peers) do
-    pl_id = spawn(LPL5, :start, [])
-    com_id = spawn(Com5, :start, [id, peers])
-    beb_id = spawn(BEB5, :start, [peers])
+    pl_id = spawn(LPL6, :start, [])
+    com_id = spawn(Com6, :start, [id, peers])
+    beb_id = spawn(BEB6, :start, [peers])
+    erb_id = spawn(ERB6, :start, [])
 
     send pl_id, { :bind, beb_id }
-    send com_id, { :bind, beb_id }
-    send beb_id, { :bind, pl_id, com_id }
+    send com_id, { :bind, erb_id }
+    send beb_id, { :bind, pl_id, erb_id }
+    send erb_id, { :bind, beb_id, com_id }
 
     send broadcast, { :bind, self(), pl_id }
 

@@ -1,24 +1,24 @@
-defmodule Com5 do
+defmodule Com6 do
 
   def start(id, peers) do
     receive do
-    { :bind, beb_id } ->
+    { :bind, erb_id } ->
       receive do
       { :broadcast, max_broadcasts, timeout } ->
         counts = Map.new()
         Process.send_after(self(), { :timeout }, timeout)
-        next(peers, max_broadcasts, counts, id, 0, beb_id)
+        next(peers, max_broadcasts, counts, id, 0, erb_id)
       end
     end
   end
 
-  defp next(peers, max_broadcasts, counts, id, broadcast, beb_id) do
+  defp next(peers, max_broadcasts, counts, id, broadcast, erb_id) do
     receive do
-    { :beb_deliver, from, message } ->
+    { :rb_deliver, from, message } ->
       proc_info = Map.get(counts, from, {0, 0})
       msg_received = elem(proc_info, 1)
       counts = Map.put(counts, from, put_elem(proc_info, 1, msg_received + 1))
-      next(peers, max_broadcasts, counts, id, broadcast, beb_id)
+      next(peers, max_broadcasts, counts, id, broadcast, erb_id)
     { :timeout } ->
       print(peers, counts, id)
     { :exit } ->
@@ -29,7 +29,7 @@ defmodule Com5 do
       0 ->
         # Updating messages received information.
       counts = if (broadcast < max_broadcasts) do
-        send beb_id, { :beb_broadcast, Enum.at(peers, id), "message" }
+        send erb_id, { :rb_broadcast, Enum.at(peers, id), "message" }
         Enum.reduce(peers, counts, fn(dest_peer), acc ->
           proc_info = Map.get(acc, dest_peer, {0, 0})
           msg_sent = elem(proc_info, 0)
@@ -43,7 +43,7 @@ defmodule Com5 do
         else
           broadcast
         end
-      next(peers, max_broadcasts, counts, id, broadcast, beb_id)
+      next(peers, max_broadcasts, counts, id, broadcast, erb_id)
     end
   end
 
