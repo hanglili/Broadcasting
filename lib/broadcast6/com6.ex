@@ -1,3 +1,5 @@
+# Hang Li Li (hl4716)
+
 defmodule Com6 do
 
   def start(id, peers) do
@@ -29,7 +31,7 @@ defmodule Com6 do
       0 ->
         # Updating messages received information.
       counts = if (broadcast < max_broadcasts) do
-        send erb_id, { :rb_broadcast, Enum.at(peers, id), "message" }
+        send erb_id, { :rb_broadcast, Enum.at(peers, id), "message#{id}#{broadcast}"}
         Enum.reduce(peers, counts, fn(dest_peer), acc ->
           proc_info = Map.get(acc, dest_peer, {0, 0})
           msg_sent = elem(proc_info, 0)

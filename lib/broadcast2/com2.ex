@@ -1,3 +1,5 @@
+# Hang Li Li (hl4716)
+
 defmodule Com2 do
 
   def start(id, peers) do
@@ -5,9 +7,6 @@ defmodule Com2 do
     { :bind, pl_id } ->
       receive do
       { :broadcast, max_broadcasts, timeout } ->
-        # counts = Enum.reduce(peers, %{}, fn(peer), acc ->
-        #   Map.put(acc, peer, {0, 0})
-        # end)
         counts = Map.new()
         Process.send_after(self(), { :timeout }, timeout)
         next(peers, max_broadcasts, counts, id, 0, pl_id)

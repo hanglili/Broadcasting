@@ -1,3 +1,5 @@
+# Hang Li Li (hl4716)
+
 defmodule LPL6 do
 
   def start() do
@@ -5,7 +7,7 @@ defmodule LPL6 do
       { :bind, beb_id } ->
       receive do
         { :pl_bind, pl_ids } ->
-          next(beb_id, pl_ids, 50)
+          next(beb_id, pl_ids, 100)
       end
     end
   end
