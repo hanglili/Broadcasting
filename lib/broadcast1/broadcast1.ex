@@ -1,7 +1,9 @@
+# Hang Li Li (hl4716)
+
 defmodule Broadcast1 do
 
   def broadcast(num_peers) do
-    max_broadcasts = 10000000
+    max_broadcasts = 1000
     timeout = 3000
 
     peers = for n <- 0..(num_peers - 1) do
