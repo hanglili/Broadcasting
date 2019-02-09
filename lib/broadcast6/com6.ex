@@ -22,7 +22,7 @@ defmodule Com6 do
             proc_info = Map.get(counts, from, {0, 0})
             msg_received = elem(proc_info, 1)
             counts = Map.put(counts, from, put_elem(proc_info, 1, msg_received + 1))
-            next(peers, max_broadcasts, counts, id, erb_id)
+            receive_msgs(peers, max_broadcasts, counts, id, erb_id, max_acceptable_msgs - 1)
 
           { :timeout } ->
             print(peers, counts, id)
@@ -32,7 +32,8 @@ defmodule Com6 do
             Process.exit(self(), "Failure")
 
       after
-        1 -> broadcast_to_peers(peers, max_broadcasts, counts, id, erb_id)
+        1 ->
+          broadcast_to_peers(peers, max_broadcasts, counts, id, erb_id)
       end
 
     else
