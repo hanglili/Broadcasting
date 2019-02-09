@@ -48,7 +48,7 @@ defmodule Broadcast4 do
     ids = 0..(num_peers - 1)
 
     peers = for n <- ids do
-      Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer4, :start, [n, self()])
+      Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer4, :start, [n, self(), ids])
     end
 
     bind(num_peers)

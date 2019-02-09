@@ -17,7 +17,7 @@ defmodule Broadcast1 do
 
   def broadcast_net(num_peers) do
     Process.sleep(5000)
-    max_broadcasts = 10000000
+    max_broadcasts = 1000
     timeout = 3000
 
     peers = for n <- 0..(num_peers - 1) do

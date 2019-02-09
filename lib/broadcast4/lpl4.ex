@@ -15,7 +15,7 @@ defmodule LPL4 do
   defp next(beb_id, pl_ids, reliability) do
     receive do
     { :pl_send, dest_peer, from, message } ->
-      if Enum.random(1..100) > (100 - reliability) do
+      if :rand.uniform(100) > (100 - reliability) do
         send Map.get(pl_ids, dest_peer), { :network_deliver, from, message }
       end
     { :network_deliver, from, message } ->

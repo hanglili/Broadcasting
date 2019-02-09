@@ -12,12 +12,12 @@ defmodule BEB6 do
 
   defp next(peers, pl, c) do
     receive do
-    { :beb_broadcast, from, message } ->
+    { :beb_broadcast, message } ->
       for dest_peer <- peers do
-        send pl, { :pl_send, dest_peer, from, message }
+        send pl, { :pl_send, dest_peer, message }
       end
-    { :pl_deliver, from, message } ->
-      send c, { :beb_deliver, from, message }
+    { :pl_deliver, message } ->
+      send c, { :beb_deliver, message }
     end
     next(peers, pl, c)
   end

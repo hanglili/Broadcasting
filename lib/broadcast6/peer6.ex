@@ -11,7 +11,7 @@ defmodule Peer6 do
     pl_id = spawn(LPL6, :start, [])
     com_id = spawn(Com6, :start, [id, ids])
     beb_id = spawn(BEB6, :start, [ids])
-    erb_id = spawn(ERB6, :start, [])
+    erb_id = spawn(ERB6, :start, [id])
 
     send pl_id, { :bind, beb_id }
     send com_id, { :bind, erb_id }
@@ -32,6 +32,7 @@ defmodule Peer6 do
     { :exit } ->
       Process.exit(pl_id, "Failure")
       Process.exit(beb_id, "Failure")
+      # Process.exit(com_id, "Failure")
       send com_id, { :exit }
       Process.exit(self(), "Failure")
     end
