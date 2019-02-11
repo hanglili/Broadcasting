@@ -16,6 +16,7 @@ defmodule Com4 do
 
   defp receive_msg(peers, max_broadcasts, counts, id, beb_id, max_acceptable_msgs) do
     if (0 < max_acceptable_msgs) do
+      # time1 = :os.system_time(:microsecond)
       receive do
         # Updating messages received information.
         { :beb_deliver, from, _ } ->
@@ -28,7 +29,10 @@ defmodule Com4 do
           print(peers, counts, id)
 
       after
-        1 -> broadcast_msg(peers, max_broadcasts, counts, id, beb_id)
+        1 ->
+          # time2 = :os.system_time(:microsecond) - time1
+          # IO.puts "The time taken is #{time2}"
+          broadcast_msg(peers, max_broadcasts, counts, id, beb_id)
       end
 
     else
@@ -58,7 +62,7 @@ defmodule Com4 do
         max_broadcasts
     end
 
-    receive_msg(peers, max_broadcasts, counts, id, beb_id, 5)
+    receive_msg(peers, max_broadcasts, counts, id, beb_id, length(peers))
   end
 
 

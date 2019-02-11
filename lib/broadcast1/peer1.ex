@@ -57,7 +57,7 @@ defmodule Peer1 do
       max_broadcasts
     end
 
-    receive_msg(peers, max_broadcasts, counts, id, 5)
+    receive_msg(peers, max_broadcasts, counts, id, length(peers))
   end
 
 

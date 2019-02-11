@@ -58,7 +58,7 @@ defmodule Com3 do
       else
         max_broadcasts
     end
-    receive_msg(peers, max_broadcasts, counts, id, beb_id, 5)
+    receive_msg(peers, max_broadcasts, counts, id, beb_id, length(peers))
   end
 
 

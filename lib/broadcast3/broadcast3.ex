@@ -3,10 +3,10 @@
 defmodule Broadcast3 do
 
   def broadcast(num_peers) do
-    max_broadcasts = 10000000
-    timeout = 3000
+    max_broadcasts = 110000
+    timeout = 300
 
-    ids = 0..(num_peers - 1)
+    ids = Enum.to_list(0..(num_peers - 1))
 
     peers = for n <- ids do
       spawn(Peer3, :start, [n, self(), ids])
@@ -42,10 +42,10 @@ defmodule Broadcast3 do
   def broadcast_net(num_peers) do
     Process.sleep(5000)
 
-    max_broadcasts = 1000
-    timeout = 3000
+    max_broadcasts = 13500
+    timeout = 500
 
-    ids = 0..(num_peers - 1)
+    ids = Enum.to_list(0..(num_peers - 1))
 
     peers = for n <- ids do
       Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer3, :start, [n, self(), ids])

@@ -64,7 +64,7 @@ defmodule Com6 do
         max_broadcasts
     end
 
-    receive_msg(peers, max_broadcasts, counts, id, erb_id, 5)
+    receive_msg(peers, max_broadcasts, counts, id, erb_id, length(peers))
   end
 
 

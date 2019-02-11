@@ -3,10 +3,10 @@
 defmodule Broadcast6 do
 
   def broadcast(num_peers) do
-    max_broadcasts = 1000
-    timeout = 3000
+    max_broadcasts = 1000000
+    timeout = 2000
 
-    ids = 0..(num_peers - 1)
+    ids = Enum.to_list(0..(num_peers - 1))
 
     peers = for n <- ids do
       spawn(Peer6, :start, [n, self(), ids])
@@ -45,7 +45,7 @@ defmodule Broadcast6 do
     max_broadcasts = 10000000
     timeout = 3000
 
-    ids = 0..(num_peers - 1)
+    ids = Enum.to_list(0..(num_peers - 1))
 
     peers = for n <- ids do
       Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer6, :start, [n, self(), ids])

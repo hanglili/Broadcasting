@@ -7,7 +7,7 @@ defmodule LPL4 do
       { :bind, beb_id } ->
       receive do
         { :pl_bind, pl_ids } ->
-          next(beb_id, pl_ids, 50)
+          next(beb_id, pl_ids, 30)
       end
     end
   end
