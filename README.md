@@ -1,7 +1,7 @@
 # Instructions
 
 ## How to run my solutions:
-#### First cd into the code directory (cwk1)
+#### First cd into the code directory.
 #### To run locally on version n with p number of peers, use the following command:
 ```
 make run VERSION=n PEERS=p
