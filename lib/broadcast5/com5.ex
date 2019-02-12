@@ -66,7 +66,6 @@ defmodule Com5 do
     receive_msg(peers, max_broadcasts, counts, id, beb_id, length(peers))
   end
 
-
   defp print(peers, counts, id) do
     counts_string = Enum.reduce(peers, "", fn(peer), acc ->
       proc_info = Map.get(counts, peer, {0, 0})

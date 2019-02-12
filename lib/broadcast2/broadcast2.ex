@@ -4,7 +4,7 @@ defmodule Broadcast2 do
 
   def broadcast(num_peers) do
     max_broadcasts = 10000000
-    timeout = 3000
+    timeout = 2000
 
     ids = Enum.to_list(0..(num_peers - 1))
 
@@ -42,8 +42,8 @@ defmodule Broadcast2 do
   def broadcast_net(num_peers) do
     Process.sleep(10000)
 
-    max_broadcasts = 10000000
-    timeout = 3000
+    max_broadcasts = 500
+    timeout = 0
 
     ids = Enum.to_list(0..(num_peers - 1))
 
