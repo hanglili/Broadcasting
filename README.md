@@ -1,25 +1,21 @@
 # Instructions
 
 ## How to run my solutions:
-#### To run locally on version n with p number of peers, use the following commands:
+#### To run locally on version n with p number of peers, use the following command:
 ```
 make run VERSION=n PEERS=p
 ```
 
-####  To run on docker on version n with p number of peers, use the following commands:
+####  To run on docker on version n with p number of peers, use the following command:
 ```
-make drun dockerrun VERSION=n PEERS=p
+make drun VERSION=n PEERS=p
 ```
 
-#### Note that after running this command, use commands:
+#### Note that after running this command, use the following command:
 ```
 make kill
 ```
-#### or
-```
-make down
-```
-#### to stop and remove the containers.
+#### to stop and remove any containers.
 
 #### The project has the following structure:
 ```bash
