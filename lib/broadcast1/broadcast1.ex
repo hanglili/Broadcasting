@@ -3,8 +3,8 @@
 defmodule Broadcast1 do
 
   def broadcast(num_peers) do
-    max_broadcasts = 10000000
-    timeout = 2000
+    max_broadcasts = 1000
+    timeout = 3000
 
     peers = for n <- 0..(num_peers - 1) do
       spawn(Peer1, :start, [n])
@@ -17,8 +17,8 @@ defmodule Broadcast1 do
 
   def broadcast_net(num_peers) do
     Process.sleep(5000)
-    max_broadcasts = 100000
-    timeout = 1000
+    max_broadcasts = 1000
+    timeout = 3000
 
     peers = for n <- 0..(num_peers - 1) do
       Node.spawn(:'peer#{n}@peer#{n}.localdomain', Peer1, :start, [n])

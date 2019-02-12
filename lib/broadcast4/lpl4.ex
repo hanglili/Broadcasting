@@ -6,8 +6,9 @@ defmodule LPL4 do
     receive do
       { :bind, beb_id } ->
       receive do
+        # pl_ids is a map that maps from a peer id to its pl process id.
         { :pl_bind, pl_ids } ->
-          next(beb_id, pl_ids, 0)
+          next(beb_id, pl_ids, 50)
       end
     end
   end

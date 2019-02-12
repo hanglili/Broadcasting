@@ -3,9 +3,10 @@
 defmodule Peer1 do
 
   def start(id) do
-    # Map from a process_id to a tuple of 2 elements(msgs broadcast, msgs received)
     receive do
       { :broadcast, max_broadcasts, timeout, peers } ->
+        # Map from a peer process id to a tuple of
+        # 2 elements(msgs broadcast, msgs received)
         counts = Map.new()
         Process.send_after(self(), { :timeout }, timeout)
         broadcast_msg(peers, max_broadcasts, counts, id)
@@ -17,7 +18,7 @@ defmodule Peer1 do
     if (0 < max_acceptable_msgs) do
       receive do
         { :network_deliver, from, _ } ->
-          # Updating messages received information.
+          # Update messages received information.
           proc_info = Map.get(counts, from, {0, 0})
           msg_received = elem(proc_info, 1)
           counts = Map.put(counts, from, put_elem(proc_info, 1, msg_received + 1))
@@ -38,6 +39,7 @@ defmodule Peer1 do
 
   defp broadcast_msg(peers, max_broadcasts, counts, id) do
     counts = if (0 < max_broadcasts) do
+      # Broadcast and update the map
       Enum.reduce(peers, counts, fn(dest_peer), acc ->
         send dest_peer, { :network_deliver, self(), "message" }
         proc_info = Map.get(acc, dest_peer, {0, 0})
@@ -46,6 +48,8 @@ defmodule Peer1 do
       end)
     else
       if receive_zeros(counts, peers) do
+        # Check whether max_broadcasts number of messages has been reached
+        # without receiving any msgs
         IO.puts "Peer #{id} has finished broadcasting"
       end
       counts

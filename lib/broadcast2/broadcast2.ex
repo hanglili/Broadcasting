@@ -3,8 +3,8 @@
 defmodule Broadcast2 do
 
   def broadcast(num_peers) do
-    max_broadcasts = 10000000
-    timeout = 2000
+    max_broadcasts = 1000
+    timeout = 3000
 
     ids = Enum.to_list(0..(num_peers - 1))
 
@@ -19,6 +19,8 @@ defmodule Broadcast2 do
     end
   end
 
+  # Wait to receive from all peers, their peer ids with
+  # their corresponding pl process ids.
   defp receive_bind(num_peers, pl_ids) do
     if (num_peers <= 0) do
       pl_ids
@@ -31,6 +33,7 @@ defmodule Broadcast2 do
     end
   end
 
+  # Send a map that maps from a peer id to its pl process id to all pl components.
   defp bind(num_peers) do
     pl_ids = Map.new()
     pl_ids = receive_bind(num_peers, pl_ids)
@@ -42,8 +45,8 @@ defmodule Broadcast2 do
   def broadcast_net(num_peers) do
     Process.sleep(10000)
 
-    max_broadcasts = 500
-    timeout = 0
+    max_broadcasts = 1000
+    timeout = 3000
 
     ids = Enum.to_list(0..(num_peers - 1))
 

@@ -7,6 +7,8 @@ defmodule Com3 do
     { :bind, beb_id } ->
       receive do
       { :broadcast, max_broadcasts, timeout } ->
+        # Map from a peer id to a tuple of
+        # 2 elements(msgs broadcast, msgs received)
         counts = Map.new()
         Process.send_after(self(), { :timeout }, timeout)
         broadcast_msg(peers, max_broadcasts, counts, id, beb_id)
@@ -18,7 +20,7 @@ defmodule Com3 do
   defp receive_msg(peers, max_broadcasts, counts, id, beb_id, max_acceptable_msgs) do
     if (0 < max_acceptable_msgs) do
       receive do
-        # Updating messages received information.
+        # Update messages received information.
         { :beb_deliver, from, _ } ->
           proc_info = Map.get(counts, from, {0, 0})
           msg_received = elem(proc_info, 1)
@@ -40,6 +42,9 @@ defmodule Com3 do
 
   defp broadcast_msg(peers, max_broadcasts, counts, id, beb_id) do
     counts = if (0 < max_broadcasts) do
+      # Broadcast and update the map
+      # Note that id is actually the index where the peer id of this
+      # component lies in the peers list. Hence the use of Enum.at().
       send beb_id, { :beb_broadcast, Enum.at(peers, id), "message" }
       Enum.reduce(peers, counts, fn(dest_peer), acc ->
         proc_info = Map.get(acc, dest_peer, {0, 0})
@@ -48,7 +53,9 @@ defmodule Com3 do
       end)
     else
       if (receive_zeros(counts, peers)) do
-        IO.puts "Peer #{id} has finished broadcasting"
+        # Check whether max_broadcasts number of messages has been reached
+        # without receiving any msgs
+        IO.puts "Peer #{Enum.at(peers, id)} has finished broadcasting"
       end
       counts
     end
@@ -67,7 +74,7 @@ defmodule Com3 do
       proc_info = Map.get(counts, peer, {0, 0})
       acc <> " " <> "{#{elem(proc_info, 0)}, #{elem(proc_info, 1)}} "
     end)
-    IO.puts "Peer #{id}: #{counts_string}"
+    IO.puts "Peer #{Enum.at(peers, id)}: #{counts_string}"
   end
 
 

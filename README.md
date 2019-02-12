@@ -25,7 +25,7 @@ make down
 ```bash
 ├── README.md
 ├── lib
-│   ├── broadcasting.ex
+│   ├── broadcasting.ex
 │   ├── dac.ex
 │   ├── broadcast1
 │   ├── broadcast2

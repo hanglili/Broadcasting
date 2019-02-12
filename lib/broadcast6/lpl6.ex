@@ -7,6 +7,7 @@ defmodule LPL6 do
       { :bind, beb_id } ->
       receive do
         { :pl_bind, pl_ids } ->
+          # pl_ids is a map that maps from a peer id to its pl process id.
           next(beb_id, pl_ids, 50)
       end
     end
