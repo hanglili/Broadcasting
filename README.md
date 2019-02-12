@@ -11,7 +11,7 @@ make run VERSION=n PEERS=p
 make drun VERSION=n PEERS=p
 ```
 
-#### Note that after running this command, use the following command:
+#### Note that after running the previous command, use the following command:
 ```
 make kill
 ```
